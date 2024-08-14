@@ -59,7 +59,7 @@ const legacy = () => {
                         <div className="space-y-2">
                             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Your Progress</h2>
                             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                                Track your progress and see how you're improving over time.
+                                Track your progress and see how you&apos;re improving over time.
                             </p>
                         </div>
                     </div>
