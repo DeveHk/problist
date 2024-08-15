@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     if (!validPassword) {
         return NextResponse.json({ valid: false }, { status: 201 })
     }
-    const accessToken = await sign({ cool: "yes" })
+    const accessToken = await sign({ _id: result._id.toString(), username: result.username, cool: "yes" })
     cookies().set({
         name: "accessToken",
         value: accessToken,
