@@ -15,6 +15,11 @@ const problemSchema = new mongoose.Schema({
         default: "NA",
         required: true
     },
+    link: {
+        type: String,
+        default: "NA",
+        required: true
+    },
     hints: {
         type: [hintSchema],
         default: []
