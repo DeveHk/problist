@@ -37,7 +37,7 @@ export function Login() {
         },
     })
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log("red")
+        console.log("Login_pressed")
         setIsLoading(true);
         setError(false); // Reset error state
 
