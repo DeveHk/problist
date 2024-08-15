@@ -16,6 +16,7 @@ export async function verify(token: string) {
         const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.ACCESS_TOKEN_SECRET as string));
         return payload;
     } catch (err) {
+        console.log(err)
         throw err;
     }
 }
