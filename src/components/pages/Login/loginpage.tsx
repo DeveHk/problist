@@ -52,6 +52,7 @@ export function Login() {
             console.log(response)
             if (response.data.valid) {
                 router.push("/dashboard");
+                console.log("valid")
             } else {
                 setError(true);
                 setIsLoading(false);
