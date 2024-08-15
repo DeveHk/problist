@@ -21,7 +21,7 @@ export async function POST(request: Request) {
             description: formData.description
         });
         const client = await clientPromise;
-        await client.db().collection("problems").insertOne(newProb);
+        await client.db().collection("problem").insertOne(newProb);
         return NextResponse.json({ success: true, newProb }, { status: 200 });
     } catch (err) {
         console.log(err)
