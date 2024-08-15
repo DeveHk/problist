@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -14,6 +15,8 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useState } from "react"
+import axios from "axios";
 const formSchema = z.object({
     username: z.string().min(2, {
         message: "Username must be at least 2 characters.",
@@ -23,6 +26,9 @@ const formSchema = z.object({
     }),
 });
 export function Login() {
+    const router = useRouter();
+    const [isloading, setIsLoading] = useState(false)
+    const [error, setError] = useState(false)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -30,8 +36,30 @@ export function Login() {
             password: ""
         },
     })
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log("red")
+        setIsLoading(true);
+        setError(false); // Reset error state
+
+        const data = new FormData();
+        data.append("userID", values.username);
+        data.append("key", values.password);
+
+        try {
+            const response = await axios.post(`api/auth/login`, data, {
+                withCredentials: true,
+            });
+            console.log(response)
+            if (response.data.valid) {
+                router.push("/dashboard");
+            } else {
+                setError(true);
+                setIsLoading(false);
+            }
+        } catch (err) {
+            console.error(err);
+            setIsLoading(false);
+        }
     }
 
 
