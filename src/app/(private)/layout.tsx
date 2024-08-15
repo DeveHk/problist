@@ -15,8 +15,12 @@ export default function RootLayout({
 }>) {
     return (
         <div lang="en">
-            <SideNav />
-            {children}
+            <Nav />
+            <div className="flex">
+                <SideNav />
+                {children}
+            </div>
+
         </div>
     );
 }

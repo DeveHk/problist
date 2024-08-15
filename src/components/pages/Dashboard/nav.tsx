@@ -9,11 +9,12 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLab
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, ListIcon, MenuIcon, PlusIcon, SearchIcon, SettingsIcon } from "lucide-react"
+import { ArrowLeft, HomeIcon, ListIcon, MenuIcon, PlusIcon, SearchIcon, SettingsIcon } from "lucide-react"
 import { redirect, useRouter } from "next/navigation"
 import axios from "axios"
 import { ModeToggle } from "@/components/ui/theme"
 import Dragon from "@/components/svg/dragon"
+import { DashboardIcon, DashIcon } from "@radix-ui/react-icons"
 
 const Nav = () => {
 
@@ -28,7 +29,7 @@ const Nav = () => {
             <header className="sticky top-0 z-30  border-b  bg-background text-gray-900 dark:text-gray-200 px-4 lg:px-2 h-10 flex items-center">
                 <Sheet>
                     <SheetTrigger asChild>
-                        <Button size="icon" variant="outline" className="sm:hidden mr-4">
+                        <Button size="icon" variant="outline" className="sm:hidden mr-4 h-6 w-6 rounded-full">
                             <MenuIcon className="h-4 w-4" />
                             <span className="sr-only">Toggle Menu</span>
                         </Button>
@@ -36,31 +37,34 @@ const Nav = () => {
                     <SheetContent side="left" className="sm:max-w-xs">
                         <nav className="grid gap-6 text-lg font-medium">
                             <Link
-                                href="#"
-                                className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                                href="/"
+                                className="group flex h-6 w-6 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                                 prefetch={false}
                             >
-                                <PlusIcon className="h-5 w-5 transition-all group-hover:scale-110" />
-                                <span className="sr-only">Acme Inc</span>
+                                <HomeIcon className="h-4 w-4 transition-all group-hover:scale-110" />
                             </Link>
-                            <Link href="#" className="flex items-center gap-4 px-2.5 text-foreground" prefetch={false}>
-                                <PlusIcon className="h-5 w-5" />
+                            <Link href="/dashboard" className="flex items-center gap-4 px-2.5 text-foreground" prefetch={false}>
+                                <DashboardIcon className="h-4 w-4" />
+                                Dashborad
+                            </Link>
+                            <Link href="/dashboard/pa" className="flex items-center gap-4 px-2.5 text-foreground" prefetch={false}>
+                                <PlusIcon className="h-4 w-4" />
                                 Create a Problem
                             </Link>
                             <Link
-                                href="#"
+                                href="/dasboard/vp"
                                 className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 prefetch={false}
                             >
-                                <ListIcon className="h-5 w-5" />
+                                <ListIcon className="h-4 w-4" />
                                 View Solved Problems
                             </Link>
                             <Link
-                                href="#"
+                                href="/dashboard/ss"
                                 className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 prefetch={false}
                             >
-                                <SettingsIcon className="h-5 w-5" />
+                                <SettingsIcon className="h-4 w-4" />
                                 Settings
                             </Link>
                         </nav>
@@ -69,9 +73,8 @@ const Nav = () => {
                 <div onClick={() => router.back()} className="flex items-center justify-center rounded-full p-1 bg-gray-700/20 hover:bg-gray-700/50" >
                     <ArrowLeft className="h-4 w-4" />
                 </div>
-                <nav className="">
 
-                </nav>
+
                 {/*<Breadcrumb className="hidden md:flex">
                     <BreadcrumbList>
                         <BreadcrumbItem>
@@ -95,32 +98,46 @@ const Nav = () => {
                         className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
                     />
                 </div>*/}
-                <div className=" ml-auto flex flex-row gap-3 justify-center items-center">
-                    <DropdownMenu >
-                        <DropdownMenuTrigger asChild>
-                            <div className="flex items-center">
-                                <TooltipProvider>
-                                    <Tooltip>
-                                        <TooltipTrigger asChild>
-                                            <Button variant="outline" size="icon" className=" h-6 w-6 p-1 border overflow-hidden rounded-full">
-                                                <Dragon />
-                                            </Button>
-                                        </TooltipTrigger>
-                                        <TooltipContent side="bottom">Profile Options</TooltipContent>
-                                    </Tooltip>
-                                </TooltipProvider>
-                            </div>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>Settings</DropdownMenuItem>
-                            <DropdownMenuItem>Support</DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem onClick={() => LogOut()}>Logout</DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                    <ModeToggle className="w-6 h-6 rounded-full" />
+                <div className=" ml-auto flex flex-row gap-10 justify-center items-center">
+                    <nav className="sm:flex hidden ">
+                        <div className="ml-auto flex space-x-10">
+                            <nav className="flex gap-4 sm:gap-6 justify-center items-center">
+                                <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+                                    Problems
+                                </Link>
+                                <Link href="/login" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+                                    Dashboard
+                                </Link>
+                            </nav>
+                        </div>
+                    </nav>
+                    <div className="flex flex-row gap-4">
+                        <DropdownMenu >
+                            <DropdownMenuTrigger asChild>
+                                <div className="flex items-center">
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <Button variant="outline" size="icon" className=" h-6 w-6 p-1 border overflow-hidden rounded-full">
+                                                    <Dragon />
+                                                </Button>
+                                            </TooltipTrigger>
+                                            <TooltipContent side="bottom">Profile Options</TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+                                </div>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>Settings</DropdownMenuItem>
+                                <DropdownMenuItem>Support</DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem onClick={() => LogOut()}>Logout</DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                        <ModeToggle className="w-6 h-6 rounded-full" />
+                    </div>
                 </div>
             </header>
         </>
