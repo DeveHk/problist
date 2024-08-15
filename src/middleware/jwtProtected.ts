@@ -9,7 +9,7 @@ export async function jwtMiddlewareProtected(request: Request) {
         return NextResponse.redirect(new URL('/login', request.url));
     }
     try {
-        await verify(accessToken.value);
+        const payload = await verify(accessToken.value);
         return NextResponse.next();
     } catch (err) {
         console.error("Protected: Token Verification Failed", err);

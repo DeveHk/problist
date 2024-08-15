@@ -7,7 +7,7 @@ import React from 'react'
 const Nav = () => {
     const { islogin, isLoading, error } = useAuth()
     return (
-        <header className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 px-4 lg:px-6 h-14 flex items-center">
+        <header className="sticky top-0 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 px-4 lg:px-6 h-14 flex items-center">
             <Link href="#" className="flex items-center justify-center" prefetch={false}>
                 <CodeIcon className="size-6" />
                 <span className="sr-only">DSA Tracker</span>

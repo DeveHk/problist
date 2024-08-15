@@ -1,18 +1,48 @@
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
-import Link from "next/link"
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb"
-import { Input } from "@/components/ui/input"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@/components/ui/dropdown-menu"
+"use client"
+import { useAuth } from "@/app/hook/use-auth"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-
-const dashboard = () => {
+const Dashboard = () => {
+    const { user, isLoading } = useAuth()
     return (
         <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-            <main className="flex-1 p-4 sm:px-6 sm:py-0 md:gap-8">
+            <main className="flex-1 p-4 sm:px-6 sm:py-0 md:gap-8 space-y-4">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>User Profile</CardTitle>
+                        <CardDescription>Your Details</CardDescription>
+                    </CardHeader>
+                    {isLoading == false && (<CardContent>
+                        <div className="grid gap-4">
+                            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>Username</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="text-2xl font-bold">{user.username}</div>
+                                    </CardContent>
+                                </Card>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>Email</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="text-2xl font-bold overflow-scroll no-scrollbar">{user.email}</div>
+                                    </CardContent>
+                                </Card>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>Cool</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="text-2xl font-bold">{user.cool}</div>
+                                    </CardContent>
+                                </Card>
+                            </div>
+
+                        </div>
+                    </CardContent>)}
+                </Card>
                 <Card>
                     <CardHeader>
                         <CardTitle>User Dashboard</CardTitle>
@@ -46,7 +76,7 @@ const dashboard = () => {
                                     </CardContent>
                                 </Card>
                             </div>
-                            <Card>
+                            {/*<Card>
                                 <CardHeader>
                                     <CardTitle>Recent Activity</CardTitle>
                                 </CardHeader>
@@ -112,7 +142,7 @@ const dashboard = () => {
                                         </TableBody>
                                     </Table>
                                 </CardContent>
-                            </Card>
+                            </Card>*/}
                         </div>
                     </CardContent>
                 </Card>
@@ -121,4 +151,4 @@ const dashboard = () => {
     )
 }
 
-export default dashboard
+export default Dashboard

@@ -6,6 +6,7 @@ export const useAuth = () => {
   const [islogin, setIslogin] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  const [user, setUser] = useState<any>(null);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -15,7 +16,9 @@ export const useAuth = () => {
       });
       console.log(response)
       setIslogin(response.data.isAuthenticated);
+      setUser(response.data)
     } catch (error) {
+      setUser(null)
       setError(true);
     }
     setIsLoading(false);
@@ -23,5 +26,5 @@ export const useAuth = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  return { islogin, isLoading, error };
+  return { islogin, isLoading, user, error };
 };

@@ -20,12 +20,15 @@ export async function POST(request: Request) {
     const keyresult = await client.db().collection("keys").findOne({ p_id: result._id });
     if (!keyresult)
         return NextResponse.json({ valid: false }, { status: 401 })
+
+    const pkey = await bcrypt.hash(key, 10);
+    console.log(pkey)
     const validPassword = await bcrypt.compare(key, keyresult.key);
     console.log(validPassword)
     if (!validPassword) {
         return NextResponse.json({ valid: false }, { status: 201 })
     }
-    const accessToken = await sign({ _id: result._id.toString(), username: result.username, cool: "yes" })
+    const accessToken = await sign({ _id: result._id.toString(), email: result.email, username: result.username, cool: "yes" })
     cookies().set({
         name: "accessToken",
         value: accessToken,

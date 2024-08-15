@@ -7,18 +7,15 @@ export async function jwtMiddlewareApi(request: Request) {
     const accessToken = cookieStore.get("accessToken");
 
     if (!accessToken) {
-        //console.log("API: No Access Token");
         return NextResponse.next();
     }
-
     try {
         //console.log("API: With Token");
         const payload = await verify(accessToken.value);
-
+        console.log(payload)
         const newHeaders = new Headers(request.headers);
         newHeaders.set('member_id', String(payload._id));
-        newHeaders.set('is_Admin', String(payload.isAdmin));
-
+        newHeaders.set('username', String(payload.username));
         return NextResponse.next({
             request: {
                 headers: newHeaders,
@@ -26,6 +23,6 @@ export async function jwtMiddlewareApi(request: Request) {
         });
     } catch (err) {
         console.error("API: Token Verification Failed", err);
-        return NextResponse.redirect(new URL('/', request.url));
+        return NextResponse.redirect(new URL('/login', request.url));
     }
 }

@@ -102,10 +102,10 @@ const Nav = () => {
                     <nav className="sm:flex hidden ">
                         <div className="ml-auto flex space-x-10">
                             <nav className="flex gap-4 sm:gap-6 justify-center items-center">
-                                <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+                                <Link href="/" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
                                     Problems
                                 </Link>
-                                <Link href="/login" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+                                <Link href="/dashboard" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
                                     Dashboard
                                 </Link>
                             </nav>
